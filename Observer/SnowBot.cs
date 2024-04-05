@@ -17,12 +17,19 @@ namespace WeatherMonitoringSystem.Observer
         }
         public void Update(WeatherData weather)
         {
-
+            if (Activation(weather))
+            {
+                Console.WriteLine($"SnowBot:activated\n{Message}");
+            }
         }
 
         public bool Activation(WeatherData weather)
         {
-            throw new NotImplementedException();
+            if (IsEnabled && weather.Tempreture < tempretureThreshold)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using WeatherMonitoringSystem.model;
@@ -17,12 +19,19 @@ namespace WeatherMonitoringSystem.Observer
 
         public void Update(WeatherData weather)
         {
-
+            if (Activation(weather))
+            {
+                Console.WriteLine($"RainBot:activated\n{Message}");
+            }
         }
 
         public bool Activation(WeatherData weather)
         {
-            throw new NotImplementedException();
+            if (IsEnabled&& weather.Humidity > humidityThresold)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

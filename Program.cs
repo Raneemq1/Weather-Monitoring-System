@@ -13,13 +13,15 @@ namespace WeatherMonitoringSystem
 
             var bots = FileConfig();
 
-            IWeatherSubject subject = new WeatherSubject();
+            WeatherSubject subject = new WeatherSubject();
 
-            AddBotObserversTOSubject(subject,bots);
+            AddBotObserversTOSubject(subject, bots);
 
             WeatherData weather = UserInput();
 
-            
+            subject.SetWeatherValue(weather);
+
+
         }
 
         public static IEnumerable<Bot> FileConfig()
@@ -28,7 +30,7 @@ namespace WeatherMonitoringSystem
 
             return configFileReader.Read(FilePath.filePath);
         }
-        public static void AddBotObserversTOSubject(IWeatherSubject subject ,IEnumerable<Bot> bots)
+        public static void AddBotObserversTOSubject(IWeatherSubject subject, IEnumerable<Bot> bots)
         {
             RainBot rainBot = (RainBot)bots.FirstOrDefault(bot => bot.GetType().Name is "RainBot");
             SnowBot snowBot = (SnowBot)bots.FirstOrDefault(bot => bot.GetType().Name is "SnowBot");
@@ -41,18 +43,18 @@ namespace WeatherMonitoringSystem
         public static WeatherData UserInput()
         {
             Console.WriteLine("Enter the Weather Data");
-            string input=Console.ReadLine();
+            string input = Console.ReadLine();
             IFileReader inputForm;
             if (input.Contains('<'))
             {
-                inputForm =new XMLFileForm();
+                inputForm = new XMLFileForm();
             }
-            else 
+            else
             {
-                inputForm =new JsonFileForm();
+                inputForm = new JsonFileForm();
             }
-            
-            FileFormReader inputReader =new FileFormReader(inputForm);
+
+            FileFormReader inputReader = new FileFormReader(inputForm);
             WeatherData weatherData = inputReader.Read(input);
             return weatherData;
         }

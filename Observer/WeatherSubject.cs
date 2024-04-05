@@ -34,6 +34,7 @@ namespace WeatherMonitoringSystem.Observer
         public void SetWeatherValue(WeatherData weather)
         {
             this.weather = weather;
+            Notify();
         }
     }
 }
