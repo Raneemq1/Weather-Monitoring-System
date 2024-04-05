@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WeatherMonitoringSystem.model;
 
 namespace WeatherMonitoringSystem.Strategy
 {
@@ -15,9 +16,9 @@ namespace WeatherMonitoringSystem.Strategy
             this.reader = reader;
         }
 
-        public void Read(string filePath)
+        public WeatherData Read(string data)
         {
-            reader.Read(filePath);
+           return reader.Read(data);
         }
     }
 }
