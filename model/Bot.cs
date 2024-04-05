@@ -12,11 +12,11 @@ namespace WeatherMonitoringSystem.model
         public string Message { get; set; }
         public double ThresoldValue { get; set; }
 
-        public Bot(bool isEnabled, string message, double thresoldValue)
+        public Bot(bool IsEnabled, string Message, double ThresoldValue)
         {
-            IsEnabled = isEnabled;
-            Message = message;
-            ThresoldValue = thresoldValue;
+            this.IsEnabled = IsEnabled;
+            this.Message = Message;
+            this.ThresoldValue = ThresoldValue;
         }
     }
 }
