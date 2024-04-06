@@ -11,17 +11,23 @@ namespace WeatherMonitoringSystem
         {
             Console.WriteLine("Weather Monitoring System");
 
-            var bots = FileConfig();
+            try
+            {
+                var bots = FileConfig();
+               
+                WeatherSubject subject = new WeatherSubject();
 
-            WeatherSubject subject = new WeatherSubject();
+                AddBotObserversTOSubject(subject, bots);
 
-            AddBotObserversTOSubject(subject, bots);
+                WeatherData weather = UserInput();
 
-            WeatherData weather = UserInput();
+                subject.SetWeatherValue(weather);
 
-            subject.SetWeatherValue(weather);
-
-
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public static IEnumerable<Bot> FileConfig()

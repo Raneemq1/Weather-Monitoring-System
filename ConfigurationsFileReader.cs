@@ -13,44 +13,43 @@ namespace WeatherMonitoringSystem
     {
         public ConfigurationsFileReader() { }
 
-        public  IEnumerable<Bot> Read(string path)
+        public IEnumerable<Bot> Read(string path)
         {
             if (!File.Exists(path))
             {
                 throw new FileNotFoundException();
             }
-            string fileContent=File.ReadAllText(path);
-            var bots = JsonSerializer.Deserialize<Dictionary<string,JsonElement>>(fileContent);
-
+            string fileContent = File.ReadAllText(path);
+            var bots = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(fileContent);
+            
             foreach (var jsonObject in bots)
             {
-                
-                var botElement=jsonObject.Value;
+                var botElement = jsonObject.Value;
                 bool enabled = botElement.GetProperty("enabled").GetBoolean();
-                string message=botElement.GetProperty("message").GetString();
+                string message = botElement.GetProperty("message").GetString();
                 double humidityThreshold = 0;
-                if (botElement.TryGetProperty("HumidityThreshold", out var humidityThresholdElement))
+                if (botElement.TryGetProperty("humidityThreshold", out var humidityThresholdElement))
                 {
                     humidityThreshold = humidityThresholdElement.GetDouble();
                 }
 
                 double temperatureThreshold = 0;
-                if (botElement.TryGetProperty("TemperatureThreshold", out var temperatureThresholdElement))
+                if (botElement.TryGetProperty("temperatureThreshold", out var temperatureThresholdElement))
                 {
                     temperatureThreshold = temperatureThresholdElement.GetDouble();
                 }
-
+                
                 switch (jsonObject.Key)
                 {
-                    case "RainBot": 
+                    case "RainBot":
                         {
-                            yield return new RainBot(enabled,message, humidityThreshold);
+                            yield return new RainBot(enabled, message, humidityThreshold);
                             break;
                         }
                     case "SnowBot":
                         {
                             yield return new SnowBot(enabled, message, temperatureThreshold);
-                          break;
+                            break;
                         }
                     case "SunBot":
                         {

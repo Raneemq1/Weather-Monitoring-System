@@ -18,7 +18,14 @@ namespace WeatherMonitoringSystem.Strategy
 
         public WeatherData Read(string data)
         {
-           return reader.Read(data);
+            try
+            {
+                return reader.Read(data);
+            }
+            catch
+            {
+                throw new Exception("Faild to load data,Invaild Input type");
+            }
         }
     }
 }

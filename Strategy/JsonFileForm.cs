@@ -13,6 +13,7 @@ namespace WeatherMonitoringSystem.Strategy
         public JsonFileForm() { }
         public WeatherData Read(string input)
         {
+
             WeatherData weather = JsonSerializer.Deserialize<WeatherData>(input);
             return weather;
 

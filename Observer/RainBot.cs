@@ -9,12 +9,12 @@ using WeatherMonitoringSystem.model;
 
 namespace WeatherMonitoringSystem.Observer
 {
-    public class RainBot : Bot,IBotObserver
+    public class RainBot : Bot, IBotObserver
     {
         private double humidityThresold;
         public RainBot(bool isEnabled, string message, double humidityThresold) : base(isEnabled, message, humidityThresold)
         {
-
+            this.humidityThresold = humidityThresold; 
         }
 
         public void Update(WeatherData weather)
@@ -27,7 +27,7 @@ namespace WeatherMonitoringSystem.Observer
 
         public bool Activation(WeatherData weather)
         {
-            if (IsEnabled&& weather.Humidity > humidityThresold)
+            if (IsEnabled && weather.Humidity > humidityThresold)
             {
                 return true;
             }

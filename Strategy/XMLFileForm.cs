@@ -13,8 +13,10 @@ namespace WeatherMonitoringSystem.Strategy
         public XMLFileForm() { }
         public WeatherData Read(string data)
         {
+
             WeatherData weather = Deserialize<WeatherData>(data);
             return weather;
+
         }
 
         public T Deserialize<T>(string xml)

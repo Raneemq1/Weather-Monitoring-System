@@ -8,9 +8,9 @@ namespace WeatherMonitoringSystem.model
 {
     public class WeatherData
     {
-       public string? Location { get; set; }
-       public double Humidity { get; set; }
-       public double Tempreture { get; set; }
+        public string? Location { get; set; }
+        public double Humidity { get; set; }
+        public double Tempreture { get; set; }
 
         public WeatherData() { }
 

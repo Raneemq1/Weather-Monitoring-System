@@ -8,7 +8,7 @@ using WeatherMonitoringSystem.model;
 namespace WeatherMonitoringSystem.Observer
 {
     public interface IBotObserver
-    {  
+    {
         void Update(WeatherData weather);
         bool Activation(WeatherData weather);
     }

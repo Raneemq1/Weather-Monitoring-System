@@ -13,7 +13,7 @@ namespace WeatherMonitoringSystem.Observer
 
         public SunBot(bool isEnabled, string message, double tempretureThreshold) : base(isEnabled, message, tempretureThreshold)
         {
-
+            this.tempretureThreshold = tempretureThreshold;
         }
 
         public void Update(WeatherData weather)
