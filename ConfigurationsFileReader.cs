@@ -1,65 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using WeatherMonitoringSystem.model;
-using WeatherMonitoringSystem.Observer;
+﻿using Microsoft.Extensions.Configuration;
+using WeatherMonitoringSystem.Models;
+
 
 namespace WeatherMonitoringSystem
 {
     public class ConfigurationsFileReader
     {
-        public ConfigurationsFileReader() { }
-
         public IEnumerable<Bot> Read(string path)
         {
             if (!File.Exists(path))
             {
                 throw new FileNotFoundException();
             }
-            string fileContent = File.ReadAllText(path);
-            var bots = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(fileContent);
-            
-            foreach (var jsonObject in bots)
-            {
-                var botElement = jsonObject.Value;
-                bool enabled = botElement.GetProperty("enabled").GetBoolean();
-                string message = botElement.GetProperty("message").GetString();
-                double humidityThreshold = 0;
-                if (botElement.TryGetProperty("humidityThreshold", out var humidityThresholdElement))
-                {
-                    humidityThreshold = humidityThresholdElement.GetDouble();
-                }
 
-                double temperatureThreshold = 0;
-                if (botElement.TryGetProperty("temperatureThreshold", out var temperatureThresholdElement))
-                {
-                    temperatureThreshold = temperatureThresholdElement.GetDouble();
-                }
-                
-                switch (jsonObject.Key)
-                {
-                    case "RainBot":
-                        {
-                            yield return new RainBot(enabled, message, humidityThreshold);
-                            break;
-                        }
-                    case "SnowBot":
-                        {
-                            yield return new SnowBot(enabled, message, temperatureThreshold);
-                            break;
-                        }
-                    case "SunBot":
-                        {
-                            yield return new SunBot(enabled, message, temperatureThreshold);
-                            break;
-                        }
-                    default: Console.WriteLine("undefined bot type"); break;
-                }
-
-            }
+            var config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("config.json").Build();
+            yield return config.GetSection(nameof(RainBot)).Get<RainBot>()??throw new Exception("");
+            yield return config.GetSection(nameof(SunBot)).Get<SunBot>() ?? throw new Exception("");
+            yield return config.GetSection(nameof(SnowBot)).Get<SnowBot>()?? throw new Exception("");
 
         }
     }
