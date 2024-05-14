@@ -3,6 +3,7 @@ using FluentAssertions;
 using Moq;
 using WeatherMonitoringSystem.Models;
 using WeatherMonitoringSystem.Serilaizers;
+using WeatherMonitoringSystem;
 
 namespace TestWeatherMonitoringSystem
 {
@@ -16,7 +17,8 @@ namespace TestWeatherMonitoringSystem
         }
 
         [Fact]
-        public void ActivationRainBotWhenHumidityInWeatherDataIsMoreThanHumididtyThresold()
+       
+        public void Should_OutputMessageNotBeEmpty_WhenHumidityIsMoreThanHumdityThresold()
         {
             //Arrange 
             RainBot bot = new RainBot(true, "yay", 75);
@@ -30,9 +32,10 @@ namespace TestWeatherMonitoringSystem
             outputMessage.Should().NotBeEmpty();
 
         }
+
         [Theory]
         [InlineData(65)]
-        public void ActivationRainBotWhenHumidityInWeatherDataIsLessThanHumididtyThresold(double humidity)
+        public void Should_OutputMessageBeEmpty_WhenHumidityIsLessThanHumdityThresold(double humidity)
         {
             //Arrange 
             RainBot bot = new RainBot(true, "yay", 75);
@@ -46,9 +49,9 @@ namespace TestWeatherMonitoringSystem
             outputMessage.Should().BeEmpty();
 
         }
-
+       
         [Fact]
-        public void DeSerializeStringUsingISerializerToWeatherData()
+        public void Should_WeatherDataNotBeNull_When_DeserializeJson()
         {
             // Arrange 
             Mock<ISerializer> mockSerializer=new Mock<ISerializer>();
@@ -64,9 +67,33 @@ namespace TestWeatherMonitoringSystem
             expectedData.Should().NotBeNull();
         }
 
+        [Fact]
 
+        public void Should_ThrowsFileNotFoundException_When_ReadWrongPath()
+        {
+            //Arrange 
+            ConfigurationsFileReader reader = new ConfigurationsFileReader();
+            string path = "file.json";
+
+            //Act &Assert
+             Assert.Throws<FileNotFoundException>(() => reader.Read(path).GetEnumerator().MoveNext());
+
+        }
+
+        [Fact]
+        public void Should_BotsCountEqualsThree_When_FileExists() 
+        {
+            //Arrange 
+            ConfigurationsFileReader reader = new ConfigurationsFileReader();
+            string path = "config.json";
+
+            //Act 
+            var result = reader.Read(path);
+
+            //Assert
+            Assert.Equal(3,result.Count());
+
+        }
     }
-
-    
 
 }
