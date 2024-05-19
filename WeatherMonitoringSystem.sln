@@ -5,7 +5,14 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherMonitoringSystem", "WeatherMonitoringSystem.csproj", "{B3D1AB58-78AE-4AB5-AA86-6B7EFA6BA314}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeatherMonitoringSystem", "..\TestWeatherMonitoringSystem\TestWeatherMonitoringSystem.csproj", "{C727E386-C90C-4BF9-99FD-4DF3ECBCA730}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWeatherMonitoringSystem", "TestWeatherMonitoringSystem\TestWeatherMonitoringSystem.csproj", "{DFEC402B-DDC3-4BAF-ABE9-8A69E9FC2701}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{93225551-5FB2-47EC-8C42-5E0FB12D4C9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{2F7DF5F7-5D5C-45CD-B6F7-BF2A5CDE528C}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,13 +24,16 @@ Global
 		{B3D1AB58-78AE-4AB5-AA86-6B7EFA6BA314}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3D1AB58-78AE-4AB5-AA86-6B7EFA6BA314}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3D1AB58-78AE-4AB5-AA86-6B7EFA6BA314}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C727E386-C90C-4BF9-99FD-4DF3ECBCA730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C727E386-C90C-4BF9-99FD-4DF3ECBCA730}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C727E386-C90C-4BF9-99FD-4DF3ECBCA730}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C727E386-C90C-4BF9-99FD-4DF3ECBCA730}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFEC402B-DDC3-4BAF-ABE9-8A69E9FC2701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFEC402B-DDC3-4BAF-ABE9-8A69E9FC2701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFEC402B-DDC3-4BAF-ABE9-8A69E9FC2701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFEC402B-DDC3-4BAF-ABE9-8A69E9FC2701}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2F7DF5F7-5D5C-45CD-B6F7-BF2A5CDE528C} = {93225551-5FB2-47EC-8C42-5E0FB12D4C9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {315B3FAF-D11C-4DD5-866D-7AE7A87E4644}
